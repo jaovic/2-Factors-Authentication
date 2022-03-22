@@ -28,7 +28,7 @@ export default class AuthService implements IAuthService {
   }
 
   async login(email: string, password: string) {
-    password = await bcrypt.hash(password, 10);
+    console.log(password);
 
     const verifyByEmail = await this.authRepository.findByEmail(email);
 
@@ -36,6 +36,8 @@ export default class AuthService implements IAuthService {
       throw new AppError(EMAIL_ALREADY_EXISTS, UNPROCESSABLE_ENTITY);
 
     const pass = verifyByEmail.password;
+    console.log(pass);
+    console.log(verifyByEmail);
 
     const login = await bcrypt.compare(password, pass);
 
