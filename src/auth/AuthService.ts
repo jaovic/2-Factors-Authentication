@@ -28,8 +28,6 @@ export default class AuthService implements IAuthService {
   }
 
   async login(email: string, password: string) {
-    console.log(password);
-
     const verifyByEmail = await this.authRepository.findByEmail(email);
 
     if (!verifyByEmail)
