@@ -11,7 +11,7 @@ export default (
 ) => {
   let { message, statusCode, error } = err;
   if (!err || !statusCode || !message) {
-    const internalError = new AppError(UNEXPECTED_ERROR);
+    const internalError = new AppError(UNEXPECTED_ERROR, 500);
     message = internalError.message;
     statusCode = internalError.statusCode;
   }

@@ -11,4 +11,6 @@ const authRouter = Router();
 
 authRouter.post("/auth/create", (req, res) => authController.create(req, res));
 
+authRouter.post("/auth/login", (req, res) => authController.login(req, res));
+
 export default authRouter;

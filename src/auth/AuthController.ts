@@ -15,4 +15,10 @@ export default class AuthController implements IAuthController {
     });
     res.status(200).json({ status: "success", user: newUser });
   }
+
+  async login(req: Request, res: Response): Promise<void> {
+    const { email, password } = req.body;
+    const userLogin = await this.authService.login(email, password);
+    res.status(200).json({ status: "Login success", user: userLogin });
+  }
 }
