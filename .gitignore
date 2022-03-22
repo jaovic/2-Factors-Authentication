@@ -1,0 +1,15 @@
+# IDE folders
+.vscode/
+
+# Build, test and dependencies
+node_modules/
+coverage/
+build/
+dist/
+
+# Sensive Config
+.env
+*.pem
+
+# Other
+.DS_Store
