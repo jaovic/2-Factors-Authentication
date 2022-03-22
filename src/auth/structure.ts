@@ -19,4 +19,7 @@ export interface IAuthService {
 
 export interface IAuthRepository {
   create(data: ICreateUser): Promise<User>;
+  findByEmail(email: string): Promise<User | null>;
+  findByCpf(cpf: string): Promise<User | null>;
+  findById(clientId: string): Promise<User | null>;
 }

@@ -12,4 +12,15 @@ export default class AuthRepository implements IAuthRepository {
       },
     });
   }
+  async findByEmail(email: string) {
+    return prisma.user.findFirst({ where: { email } });
+  }
+
+  async findByCpf(cpf: string) {
+    return prisma.user.findFirst({ where: { cpf } });
+  }
+
+  async findById(clientId: string) {
+    return prisma.user.findFirst({ where: { id: clientId } });
+  }
 }
