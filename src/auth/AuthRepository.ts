@@ -1,5 +1,6 @@
 import prisma from "../database/client";
 import { IAuthRepository, ICreateUser } from "./structure";
+import dayjs from "dayjs";
 
 export default class AuthRepository implements IAuthRepository {
   async create(data: ICreateUser) {
@@ -22,5 +23,20 @@ export default class AuthRepository implements IAuthRepository {
 
   async findById(clientId: string) {
     return prisma.user.findFirst({ where: { id: clientId } });
+  }
+
+  async saveToken(userId: string) {
+    console.log("repository teste");
+    const expireIn = dayjs().add(15, "seconds").unix();
+    try {
+      const saveToken = await prisma.refreshToken.create({
+        data: {
+          userId,
+          expireIn,
+        },
+      });
+      return saveToken;
+    } catch (error) {}
+    console.log("dps prisma");
   }
 }

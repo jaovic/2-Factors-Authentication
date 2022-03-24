@@ -1,5 +1,6 @@
 import AuthRepository from "./AuthRepository";
 import bcrypt from "bcrypt";
+import jsonwebtoken from "jsonwebtoken";
 import { ICreateUser, IAuthService } from "./structure";
 import AppError from "../error/appError";
 import {
@@ -33,12 +34,19 @@ export default class AuthService implements IAuthService {
     if (!verifyByEmail)
       throw new AppError(EMAIL_ALREADY_EXISTS, UNPROCESSABLE_ENTITY);
 
-    const pass = verifyByEmail.password;
-    console.log(pass);
-    console.log(verifyByEmail);
-
-    const login = await bcrypt.compare(password, pass);
+    const login = await bcrypt.compare(password, verifyByEmail.password);
 
     if (!login) throw new AppError(EMAIL_ALREADY_EXISTS, UNPROCESSABLE_ENTITY);
+
+    const token = jsonwebtoken.sign({}, "sakdnqobcnqoifbqo2183712982149", {
+      subject: verifyByEmail.id,
+      expiresIn: "60s",
+    });
+    console.log("teste teste");
+
+    const userId = verifyByEmail.id;
+
+    const genereteRfreshtoken = await this.authRepository.saveToken(userId);
+    return { token, genereteRfreshtoken };
   }
 }

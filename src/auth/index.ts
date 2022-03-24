@@ -1,4 +1,5 @@
 import { Router } from "express";
+import { checkToken } from "../middlewares/checkToken";
 import AuthController from "./AuthController";
 import AuthRepository from "./AuthRepository";
 import AuthService from "./AuthService";

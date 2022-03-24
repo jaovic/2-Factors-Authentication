@@ -21,4 +21,9 @@ export default class AuthController implements IAuthController {
     const userLogin = await this.authService.login(email, password);
     res.status(200).json({ status: "Login success", user: userLogin });
   }
+
+  // async logout(req: Request, res: Response) {
+  //   const id = req.body.id;
+  //   const saveToken = await this.authService.saveToken(id);
+  // }
 }
