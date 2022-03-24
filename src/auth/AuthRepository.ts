@@ -29,14 +29,16 @@ export default class AuthRepository implements IAuthRepository {
     console.log("repository teste");
     const expireIn = dayjs().add(15, "seconds").unix();
     try {
-      const saveToken = await prisma.refreshToken.create({
+      const saveToken = await prisma.userRefreshToken.create({
         data: {
-          userId,
-          expireIn,
+          userId: userId,
+          expiresIn: expireIn,
         },
       });
+      console.log(saveToken);
       return saveToken;
-    } catch (error) {}
-    console.log("dps prisma");
+    } catch (error) {
+      return new Error(error);
+    }
   }
 }
